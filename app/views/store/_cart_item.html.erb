@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Untitled Document</title>
+	</head>
+	
+	<body>
+		<% if cart_item == @current_item %>
+			<tr id="current_item">
+		<% else %>
+			<tr>
+		<% end %>
+			<td><%= cart_item.quantity %>&times;</td>
+			<td><%=h cart_item.title %></td>
+			<td class="item-price"><%= number_to_currency(cart_item.price) %></td>
+		</tr>
+	</body>
+</html>
