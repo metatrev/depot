@@ -11,7 +11,7 @@ class CartItem
     @quantity += 1
   end
   
-  def decrement_quanity
+  def decrement_quantity
     @quantity -= 1 if @quantity > 0
   end
   

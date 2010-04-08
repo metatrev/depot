@@ -17,7 +17,24 @@ class StoreController < ApplicationController
     logger.error("Attempt to access invalid product #{params[:id]}")
     redirect_to_index("Invalid product")
   end
-    
+  
+  def remove_from_cart
+    begin
+      product = Product.find(params[:id])  
+    rescue ActiveRecord::RecordNotFound
+      logger.error("Attempt to access invalid product #{params[:id]}")
+      redirect_to_index("Invalid product")
+    else
+      @cart = find_cart
+      @current_item = @cart.remove_product(product)
+      if request.xhr?
+        respond_to {|format| format.js}
+      else
+        redirect_to_index
+      end
+    end
+  end
+
   def empty_cart
     session[:cart] = nil
     redirect_to_index unless request.xhr?
